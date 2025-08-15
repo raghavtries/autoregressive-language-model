@@ -1,0 +1,57 @@
+[
+  {
+    "config_name": "baseline",
+    "device": "cpu",
+    "amp": false,
+    "torch_compile": false,
+    "gradient_checkpointing": false,
+    "total_time": 0.13701796531677246,
+    "total_tokens": 1280,
+    "tokens_per_sec": 9341.840663308363,
+    "final_loss": 4.313064098358154
+  },
+  {
+    "config_name": "with_amp",
+    "device": "cpu",
+    "amp": true,
+    "torch_compile": false,
+    "gradient_checkpointing": false,
+    "total_time": 0.0699317455291748,
+    "total_tokens": 1280,
+    "tokens_per_sec": 18303.56142713465,
+    "final_loss": 4.313064098358154
+  },
+  {
+    "config_name": "with_compile",
+    "device": "cpu",
+    "amp": false,
+    "torch_compile": true,
+    "gradient_checkpointing": false,
+    "total_time": 2.0516319274902344,
+    "total_tokens": 1280,
+    "tokens_per_sec": 623.8935858079702,
+    "final_loss": 4.313826084136963
+  },
+  {
+    "config_name": "with_gradient_checkpointing",
+    "device": "cpu",
+    "amp": false,
+    "torch_compile": false,
+    "gradient_checkpointing": true,
+    "total_time": 0.07695722579956055,
+    "total_tokens": 1280,
+    "tokens_per_sec": 16632.616192972346,
+    "final_loss": 4.313064098358154
+  },
+  {
+    "config_name": "all_optimizations",
+    "device": "cpu",
+    "amp": true,
+    "torch_compile": true,
+    "gradient_checkpointing": true,
+    "total_time": 0.06570076942443848,
+    "total_tokens": 1280,
+    "tokens_per_sec": 19482.268034503155,
+    "final_loss": 4.313826084136963
+  }
+]

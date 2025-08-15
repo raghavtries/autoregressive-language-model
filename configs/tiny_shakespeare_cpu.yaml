@@ -1,0 +1,30 @@
+model:
+  vocab_size: 500
+  d_model: 128
+  n_layers: 3
+  n_heads: 4
+  d_ff: 512
+  dropout: 0.1
+  block_size: 128
+
+train:
+  learning_rate: 3e-4
+  warmup_steps: 100
+  max_steps: 500
+  batch_size: 8
+  grad_accumulation_steps: 1
+  grad_clip: 1.0
+  amp: false
+  use_compile: false
+  use_gradient_checkpointing: false
+  log_interval: 25
+  eval_interval: 100
+  save_interval: 200
+
+data:
+  train_path: data/tiny_shakespeare_train.txt
+  val_path: data/tiny_shakespeare_val.txt
+  block_size: 128
+
+tokenizer:
+  vocab_size: 500 

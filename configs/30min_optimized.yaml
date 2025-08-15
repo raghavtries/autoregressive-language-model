@@ -1,0 +1,30 @@
+model:
+  vocab_size: 2000          # Larger vocabulary for better tokenization
+  d_model: 512             # 4x larger than tiny (128 -> 512)
+  n_layers: 8              # More layers for better capacity
+  n_heads: 8               # More attention heads
+  d_ff: 2048              # Larger feed-forward
+  dropout: 0.1
+  block_size: 256          # Longer sequences
+
+train:
+  learning_rate: 1e-4      # Slightly lower for stability
+  warmup_steps: 200        # More warmup for larger model
+  max_steps: 3000          # ~30 minutes at ~600 steps/minute
+  batch_size: 16           # Larger batches for efficiency
+  grad_accumulation_steps: 2  # Effective batch size = 32
+  grad_clip: 1.0
+  amp: true                # Enable AMP for speed
+  use_compile: false       # Keep disabled for CPU
+  use_gradient_checkpointing: false
+  log_interval: 50
+  eval_interval: 200
+  save_interval: 500
+
+data:
+  train_path: data/tiny_shakespeare_train.txt
+  val_path: data/tiny_shakespeare_val.txt
+  block_size: 256
+
+tokenizer:
+  vocab_size: 2000 

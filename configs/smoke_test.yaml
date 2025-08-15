@@ -1,0 +1,30 @@
+model:
+  vocab_size: 50
+  d_model: 64
+  n_layers: 2
+  n_heads: 4
+  d_ff: 128
+  dropout: 0.1
+  block_size: 16
+
+train:
+  learning_rate: 3e-4
+  warmup_steps: 5
+  max_steps: 100
+  batch_size: 2
+  grad_accumulation_steps: 1
+  grad_clip: 1.0
+  amp: false
+  use_compile: false
+  use_gradient_checkpointing: false
+  log_interval: 10
+  eval_interval: 50
+  save_interval: 50
+
+data:
+  train_path: data/train.txt
+  val_path: data/val.txt
+  block_size: 16
+
+tokenizer:
+  vocab_size: 50 
