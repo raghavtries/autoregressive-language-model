@@ -54,9 +54,10 @@ def test_dataloader_batch_shape(trained_tokenizer, sample_data):
     batch = next(iter(dataloader))
 
     # Check shape
-    assert batch.shape == (batch_size, block_size), (
-        f"Expected shape ({batch_size}, {block_size}), got {batch.shape}"
-    )
+    assert batch.shape == (
+        batch_size,
+        block_size,
+    ), f"Expected shape ({batch_size}, {block_size}), got {batch.shape}"
 
 
 def test_dataloader_batch_dtype(trained_tokenizer, sample_data):
@@ -84,9 +85,9 @@ def test_dataloader_different_batch_sizes(trained_tokenizer, sample_data):
         dataloader = make_dataloader(dataset, batch_size, shuffle=False)
 
         batch = next(iter(dataloader))
-        assert batch.shape[0] == batch_size, (
-            f"Expected batch size {batch_size}, got {batch.shape[0]}"
-        )
+        assert (
+            batch.shape[0] == batch_size
+        ), f"Expected batch size {batch_size}, got {batch.shape[0]}"
 
 
 def test_dataloader_different_block_sizes(trained_tokenizer, sample_data):
@@ -98,9 +99,9 @@ def test_dataloader_different_block_sizes(trained_tokenizer, sample_data):
         dataloader = make_dataloader(dataset, batch_size, shuffle=False)
 
         batch = next(iter(dataloader))
-        assert batch.shape[1] == block_size, (
-            f"Expected block size {block_size}, got {batch.shape[1]}"
-        )
+        assert (
+            batch.shape[1] == block_size
+        ), f"Expected block size {block_size}, got {batch.shape[1]}"
 
 
 def test_dataloader_shuffle(trained_tokenizer, sample_data):
@@ -138,9 +139,9 @@ def test_dataloader_drop_last(trained_tokenizer, sample_data):
     for batch in dataloader:
         batch_count += 1
         # All batches should have full batch_size
-        assert batch.shape[0] == batch_size, (
-            f"Expected batch size {batch_size}, got {batch.shape[0]}"
-        )
+        assert (
+            batch.shape[0] == batch_size
+        ), f"Expected batch size {batch_size}, got {batch.shape[0]}"
 
     # Should have at least one batch
     assert batch_count > 0, "Dataloader should produce at least one batch"
@@ -167,18 +168,18 @@ def test_dataset_item_access(trained_tokenizer, sample_data):
 
     # Test first item
     first_item = dataset[0]
-    assert first_item.shape == (block_size,), (
-        f"Expected shape ({block_size},), got {first_item.shape}"
-    )
-    assert first_item.dtype == torch.long, (
-        f"Expected dtype torch.long, got {first_item.dtype}"
-    )
+    assert first_item.shape == (
+        block_size,
+    ), f"Expected shape ({block_size},), got {first_item.shape}"
+    assert (
+        first_item.dtype == torch.long
+    ), f"Expected dtype torch.long, got {first_item.dtype}"
 
     # Test last item
     last_item = dataset[len(dataset) - 1]
-    assert last_item.shape == (block_size,), (
-        f"Expected shape ({block_size},), got {last_item.shape}"
-    )
-    assert last_item.dtype == torch.long, (
-        f"Expected dtype torch.long, got {last_item.dtype}"
-    )
+    assert last_item.shape == (
+        block_size,
+    ), f"Expected shape ({block_size},), got {last_item.shape}"
+    assert (
+        last_item.dtype == torch.long
+    ), f"Expected dtype torch.long, got {last_item.dtype}"

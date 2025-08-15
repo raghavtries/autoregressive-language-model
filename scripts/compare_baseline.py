@@ -6,12 +6,11 @@ import json
 
 import torch
 import yaml
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
-
 from llm_ar.data import TextDataset, make_dataloader
 from llm_ar.model import TransformerLM
 from llm_ar.tokenizer import Tokenizer
 from llm_ar.utils import set_seed
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 
 def load_our_model(
@@ -266,9 +265,7 @@ def main():
     print(f"  Perplexity: {gpt2_perplexity:.2f}")
     print("\nComparison:")
     print(f"  Relative Difference: {relative_diff:+.2f}%")
-    print(
-        f"  Within Target Range (≤15%): {'✅' if abs(relative_diff) <= 15.0 else '❌'}"
-    )
+    print(f"  Within Target Range (≤15%): {'✅' if abs(relative_diff) <= 15.0 else '❌'}")
     print("\nNote: This comparison uses different tokenizers and vocabularies.")
     print("      For a fair comparison, both models should use the same tokenizer.")
     print("=" * 60)

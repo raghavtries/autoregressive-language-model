@@ -14,9 +14,10 @@ def test_causal_mask_shape():
     # Test with different sequence lengths
     for T in [4, 8, 16, 32]:
         mask = causal_mask(T, torch.device("cpu"))
-        assert mask.shape == (T, T), (
-            f"Mask shape should be ({T}, {T}), got {mask.shape}"
-        )
+        assert mask.shape == (
+            T,
+            T,
+        ), f"Mask shape should be ({T}, {T}), got {mask.shape}"
 
 
 def test_causal_mask_strictly_upper_triangular():
@@ -26,15 +27,13 @@ def test_causal_mask_strictly_upper_triangular():
 
     # Test that mask is True only above the main diagonal
     upper_triangle = torch.triu(mask, diagonal=1)
-    assert torch.all(upper_triangle == mask), (
-        "Mask should be True only above main diagonal"
-    )
+    assert torch.all(
+        upper_triangle == mask
+    ), "Mask should be True only above main diagonal"
 
     # Test that diagonal and below are all False
     lower_triangle_and_diagonal = torch.tril(mask, diagonal=0)
-    assert torch.all(~lower_triangle_and_diagonal), (
-        "Diagonal and below should be False"
-    )
+    assert torch.all(~lower_triangle_and_diagonal), "Diagonal and below should be False"
 
 
 def test_causal_mask_device():
@@ -65,9 +64,9 @@ def test_causal_mask_attention_blocking():
     masked_scores = attention_scores.masked_fill(mask, float("-inf"))
 
     # Verify that masked positions have -inf
-    assert torch.all(torch.isinf(masked_scores[mask])), (
-        "Masked positions should have -inf"
-    )
+    assert torch.all(
+        torch.isinf(masked_scores[mask])
+    ), "Masked positions should have -inf"
 
     # Verify that unmasked positions retain original values
     unmasked_positions = ~mask

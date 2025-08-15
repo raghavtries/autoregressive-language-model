@@ -134,7 +134,7 @@ jobs:
         PYTHONPATH=src python src/llm_ar/generate.py --checkpoint logs/final_model.pt --config configs/smoke_test.yaml --prompt "Hello" --max_new_tokens 10 --temperature 0.8
 
     - name: Upload training artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: training-artifacts
@@ -144,7 +144,7 @@ jobs:
         retention-days: 7
 
     - name: Upload model artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: model-artifacts

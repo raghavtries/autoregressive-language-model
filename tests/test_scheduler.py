@@ -33,9 +33,9 @@ def test_warmup_then_cosine():
             progress = (step - warmup_steps) / (max_steps - warmup_steps)
             expected_lr = target_lr * 0.5 * (1 + math.cos(math.pi * progress))
 
-        assert abs(lr - expected_lr) < 1e-6, (
-            f"Step {step}: expected {expected_lr}, got {lr}"
-        )
+        assert (
+            abs(lr - expected_lr) < 1e-6
+        ), f"Step {step}: expected {expected_lr}, got {lr}"
 
 
 def test_warmup_phase():
@@ -54,9 +54,9 @@ def test_warmup_phase():
         lr = optimizer.param_groups[0]["lr"]
         expected_lr = target_lr * (step / warmup_steps)
 
-        assert abs(lr - expected_lr) < 1e-6, (
-            f"Step {step}: expected {expected_lr}, got {lr}"
-        )
+        assert (
+            abs(lr - expected_lr) < 1e-6
+        ), f"Step {step}: expected {expected_lr}, got {lr}"
 
     # Test that lr increases linearly
     scheduler.step(0)
@@ -88,9 +88,9 @@ def test_cosine_decay_phase():
         progress = (step - warmup_steps) / (max_steps - warmup_steps)
         expected_lr = target_lr * 0.5 * (1 + math.cos(math.pi * progress))
 
-        assert abs(lr - expected_lr) < 1e-6, (
-            f"Step {step}: expected {expected_lr}, got {lr}"
-        )
+        assert (
+            abs(lr - expected_lr) < 1e-6
+        ), f"Step {step}: expected {expected_lr}, got {lr}"
 
     # Test that lr decreases monotonically
     scheduler.step(100)
@@ -236,9 +236,9 @@ def test_scheduler_monotonicity():
     for step in range(warmup_steps + 1):
         scheduler.step(step)
         lr = optimizer.param_groups[0]["lr"]
-        assert lr >= prev_lr, (
-            f"LR should be non-decreasing during warmup at step {step}"
-        )
+        assert (
+            lr >= prev_lr
+        ), f"LR should be non-decreasing during warmup at step {step}"
         prev_lr = lr
 
     # Test monotonicity during decay
