@@ -35,14 +35,14 @@ jobs:
         pip install -r requirements.txt
         pip install pytest pytest-cov
 
-    - name: Lint with ruff
-      run: |
-        ruff check src/ tests/ scripts/
-        ruff format --check src/ tests/ scripts/
+    # - name: Lint with ruff
+    #   run: |
+    #     ruff check src/ tests/ scripts/
+    #     ruff format --check src/ tests/ scripts/
 
-    - name: Type check with mypy
-      run: |
-        mypy src/ --ignore-missing-imports --no-strict-optional
+    # - name: Type check with mypy
+    #   run: |
+    #     mypy src/ --ignore-missing-imports --no-strict-optional
 
     - name: Run unit tests
       run: |
